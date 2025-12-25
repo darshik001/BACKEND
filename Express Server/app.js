@@ -33,16 +33,39 @@ app.post('/add-student',(req,res)=>{
     res.redirect('/')
 })
 
-app.post('/delete-student/:id',(req,res)=>{
-    console.log(req.params.id)
-    // students = students.filter((stud)=>stud.id !==req.params.id)
+app.get('/delete-student/:id',(req,res)=>{
+    // console.log(req.params.id)
+    let id = req.params.id
+    students = students.filter((stud)=>stud.id !==id)
     res.redirect('/')
 })
 
+app.get('/edit-student/:id',(req,res)=>{
+    let id  = req.params.id;
+    let stude = students.find((stud=> stud.id ==id))
+    res.render('editStud',{stude})
+})
+app.post('/update-student/:id',(req,res)=>{
+    let id  = req.params.id;
+    console.log(id)
+   let update =  students.map((stude)=>{
+        if(stude.id == id){
+            return{
+                ...req.body,
+                id:id,
+            }
+        }else{
+            return stude
+        }
+    })
 
+    students = update
+    res.redirect('/')
+})
 app.use((req, res) => {
   res.status(404).send('Default Route: Page Not Found')
 })
+
 
 app.listen(8080,()=>{
     console.log(`http://localhost:8080`)
