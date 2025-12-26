@@ -1,8 +1,15 @@
 const express = require('express')
-
 const app = express()
 
-app.use(express.urlencoded())
+const middalwer = (req,res,next)=>{
+    // console.log(req.query.age)
+    if(req.query.age >=18){
+        next()
+    }else{
+        res.end('You are Not eligibale')
+    }
+}
+
 let students = [
     {
         'id':'101',
@@ -24,9 +31,18 @@ let students = [
 ]
 
 app.set('view engine', 'ejs');
+
+app.use(express.urlencoded())
+app.use(express.json())
+// app.use(middalwer)  
+app.use(express.static("public"))
 app.get('/',(req,res)=>{
-    res.render('index',{students})
+    res.render('dashboard')
 })
+
+// app.get('/',middalwer,(req,res)=>{
+//     res.render('index',{students})
+// })
 
 app.post('/add-student',(req,res)=>{
     students.push(req.body)
