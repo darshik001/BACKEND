@@ -40,26 +40,26 @@
     <div class="card shadow-lg p-4">
       <h2 class="text-center mb-4 text-primary">Student Details Form</h2>
 
-      <form action="/add-student" method="POST">
+      <form action="/add-student" method="POST" enctype="multipart/form-data">
         <div class="mb-3">
           <label class="form-label">Full Name</label>
-          <input type="text" name="name" class="form-control" placeholder="Enter full name" required>
+          <input type="text" name="name" class="form-control" placeholder="Enter full name" >
         </div>
 
         <div class="mb-3">
           <label class="form-label">Email</label>
-          <input type="email" name="email" class="form-control" placeholder="Enter email address" required>
+          <input type="email" name="email" class="form-control" placeholder="Enter email address" >
         </div>
 
         <div class="mb-3">
           <label class="form-label">Mobile Number</label>
-          <input type="text" name="mobile" class="form-control" placeholder="Enter mobile no." required>
+          <input type="text" name="mobile" class="form-control" placeholder="Enter mobile no." >
         </div>
 
         <div class="mb-3">
           <label class="form-label d-block">Gender</label>
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="gender" value="Male" id="male" required>
+            <input class="form-check-input" type="radio" name="gender" value="Male" id="male" >
             <label class="form-check-label" for="male">Male</label>
           </div>
           <div class="form-check form-check-inline">
@@ -71,12 +71,12 @@
 
         <div class="mb-3">
           <label class="form-label">Date of Birth</label>
-          <input type="date" name="dob" class="form-control" required>
+          <input type="date" name="dob" class="form-control" >
         </div>
 
         <div class="mb-3">
           <label class="form-label">Course</label>
-          <select name="course" class="form-select" required>
+          <select name="course" class="form-select" >
             <option value="">Select course</option>
                         <option value="BCA">BCA</option>
                         <option value="BBA" >BBA</option>
@@ -86,6 +86,15 @@
           </select>
         </div>
 
+        <div class="mb-3">
+          <label class="form-label">date</label>
+            <input type="date"name="date" class="form-control">
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">profileImage</label>
+            <input type="file"name="profileImage" class="form-control">
+        </div>
         <button type="submit" class="btn btn-primary w-100">Submit</button>
       </form>
     </div>

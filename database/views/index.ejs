@@ -39,24 +39,20 @@
 
 
 
-
-
-
-
-  <div class="container mt-5">
-
+<div class="container mt-5">
 <div class="row">
   <h3 class="text-center text-primary mb-4">Student Details</h3>
   <%students.forEach((student)=>{%>
   <div class="col-3">
-        <div class="card shadow-lg p-4" style="max-width: 500px; margin: auto;">
-
+    <div class="card shadow-lg p-4" style="max-width: 500px; margin: auto;">
+          <img src="<%=student.profileImage%>" height="200" alt="img"/>
         <p><strong>Name:</strong> <span id="vName"><%=student.name%></span></p>
         <p><strong>Email:</strong> <span id="vEmail"><%=student.email%></span></p>
         <p><strong>Mobile:</strong> <span id="vMobile"><%=student.mobile%></span></p>
         <p><strong>Gender:</strong> <span id="vGender"><%=student.gender%></span></p>
         <p><strong>DOB:</strong> <span id="vDOB"><%=student.dob%></span></p>
         <p><strong>Course:</strong> <span id="vCourse"><%=student.course%></span></p>
+        <p><strong>Date:</strong> <span id="vdate"><%=student.date%></span></p>
 
         <div class="d-flex justify-content-between mt-4">
             <a href="/editstudent/<%=student.id%>" class="btn btn-warning w-50 me-2">Edit</a>

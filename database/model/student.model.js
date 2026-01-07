@@ -6,7 +6,6 @@ const Studentschema = mongoose.Schema({
       },
         email:{
             type:String,
-            
         },
         mobile: {
             type:String
@@ -18,6 +17,12 @@ const Studentschema = mongoose.Schema({
             type:String
         },
         course: {
+            type:String
+        },
+        date:{
+            type:String
+        },
+        profileImage:{
             type:String
         }
 })

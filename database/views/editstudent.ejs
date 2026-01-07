@@ -40,7 +40,7 @@
         <div class="card shadow-lg p-4">
             <h2 class="text-center mb-4 text-primary">Update Details Form</h2>
 
-            <form action="/update-student/<%=student.id%>" method="POST">
+            <form action="/update-student/<%=student.id%>" method="POST" enctype="multipart/form-data">
                 <div class="mb-3">
                     <label class="form-label">Full Name</label>
                     <input type="text" name="name" value="<%=student.name%>" class="form-control"
@@ -89,7 +89,16 @@
                         <option value="MBA" <%=student.course=="MBA" ? "selected" : "" %>>MBA</option>
                     </select>
                 </div>
+ <div class="mb-3">
+          <label class="form-label">date</label>
+            <input type="date"name="date"value="<%=student.date%>" class="form-control">
+        </div>
 
+         <div class="mb-3">
+          <label class="form-label">profileImage</label>
+            <input type="file"name="profileImage" class="form-control">
+            <img src="<%=student.profileImage%>" class="mt-2" width="200" alt="">
+        </div>
                 <button type="submit" class="btn btn-primary w-100">Update</button>
             </form>
         </div>
