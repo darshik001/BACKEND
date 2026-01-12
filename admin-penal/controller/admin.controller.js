@@ -31,18 +31,18 @@ exports.addAdmin = async(req,res)=>{
 
 exports.viewAdmin = async(req,res)=>{
     try {
-        let search = req.query.params? req.query.params:"";
-        console.log(search)
+        let search = req.query.search ? req.query.search:"";
+        console.log("search input",search)
         let admins = await  adminModel.find({
             $or:[
                 {
-                    "fistname":{$regex:search,$options:"i"}
+                    "firstname":{$regex:search,$options:"i"}
                 },
                 {
                     "lastname":{$regex:search,$options:"i"}
                 }
             ]
-        })
+        }).sort({firstname:-1})
         res.render('admin/viewadmin',{admins})
         
     } catch (error) {
