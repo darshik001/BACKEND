@@ -2,12 +2,21 @@ const adminModel = require('../model/admin.model')
 const bcrypt = require('bcrypt')
 const path = require('path')
 const fs = require('fs')
+
+
 exports.addAdminepage =async (req,res)=>{
-    res.render('admin/addAdmin')
+    // res.clearCookie('hello');
+    if(req.cookies && req.cookies.user && req.cookies.user._id){
+
+        res.render('admin/addAdmin')
+    }else{
+        res.redirect('/user/login')
+    }
 }
 
 
 exports.addAdmin = async(req,res)=>{
+    
     let imagepath = ""
     if(req.file){
         imagepath = `/uploads/${req.file.filename}`
@@ -30,10 +39,28 @@ exports.addAdmin = async(req,res)=>{
 
 
 exports.viewAdmin = async(req,res)=>{
+        //   console.log(req.cookies)
     try {
         let search = req.query.search ? req.query.search:"";
-        console.log("search input",search)
-        let admins = await  adminModel.find({
+        let aseorder = req.query.aseorder
+
+        // pagenation
+
+        let page = parseInt(req.query.page) || 1
+        let limit = 5
+        let skip = Math.ceil(page -1) * limit 
+        let totaleadmin = await adminModel.countDocuments()
+        let totalpage = Math.ceil(totaleadmin/limit)
+        
+        let order  = 1;
+        if(aseorder =="ase"){
+   order = 1
+        }else if(aseorder =="des"){
+            order = -1
+        }
+
+        
+        let admins = await  adminModel.find( {
             $or:[
                 {
                     "firstname":{$regex:search,$options:"i"}
@@ -42,8 +69,23 @@ exports.viewAdmin = async(req,res)=>{
                     "lastname":{$regex:search,$options:"i"}
                 }
             ]
-        }).sort({firstname:-1})
-        res.render('admin/viewadmin',{admins})
+        }).skip(skip).limit(limit).sort({firstname:order})
+        
+
+
+    //   if(order){
+    //     admins = await adminModel.find().sort({firstname:order})
+    //   }
+        if(req.cookies && req.cookies.user && req.cookies.user._id){
+ res.render('admin/viewadmin',{
+        admins,
+        totalpage,
+        currantPage:page
+        })
+        } else{
+            res.redirect('/user/login')
+        }
+       
         
     } catch (error) {
         console.log(error)
@@ -55,8 +97,12 @@ exports.editAdmin = async(req,res)=>{
     let id  = req.params.id;
     try {
         let admin = await adminModel.findById(id)
-     
-        res.render('admin/editAdmin',{admin})
+         if(req.cookies && req.cookies.user && req.cookies.user._id){
+
+             res.render('admin/editAdmin',{admin})
+         }else{
+            res.redirect('/user/login')
+         }
     } catch (error) {
         console.log(error)
     }

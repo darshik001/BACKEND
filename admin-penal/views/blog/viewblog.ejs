@@ -1,0 +1,103 @@
+<%- include('../header')%>
+
+
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+
+            <!-- ============================================================== -->
+            <!-- Recent comment and chats -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <!-- column -->
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Latest Posts</h4>
+                        </div>
+                        <div class="comment-widgets scrollable">
+                            <!-- Comment Row -->
+                            <% blogs.forEach((blog,i)=>{%>
+                                <div class="d-flex flex-row comment-row m-t-0">
+                                    <!-- <div class="p-2"><img src="/assets/images/users/1.jpg" alt="user" width="50" class="rounded-circle"></div> -->
+                                    <div class="p-2"><img
+                                            src="<%= blog.profileImage ? blog.profileImage:'/assets/images/users/1.jpg' %>"
+                                            width="50" class="rounded-circle"></div>
+                                    <div class="comment-text w-100">
+                                        <h6 class="font-medium float-right">
+                                            <%=blog.name%>
+                                        </h6>
+                                        <h6 class="">
+                                            <%=blog.title%>
+                                        </h6>
+
+
+                                        <span id="readmore-<%=blog._id%>" class="m-b-15" style="display:block;">
+                                            <%= blog.blog.substring(0,350) %>
+                                                <% if(blog.blog.length> 350){ %>
+                                                    <a class="text-primary"
+                                                        style="cursor:pointer; text-decoration:underline;"
+                                                        onclick="handalclickmore('<%= blog._id %>')">
+                                                        Read more
+                                                    </a>
+                                                    <% } %>
+                                        </span>
+
+                                        <span id="readless-<%=blog._id%>" class="m-b-15" style="display:none;">
+                                            <%= blog.blog %>
+                                                <a class="text-primary"
+                                                    style="cursor:pointer; text-decoration:underline;"
+                                                    onclick="handalclickless('<%= blog._id %>')">
+                                                    Read less
+                                                </a>
+                                        </span>
+
+                                        <div class="comment-footer">
+                                            <span class="text-muted float-right">
+                                                <%= blog.date%>
+                                            </span>
+                                            <a href="/blog/edit-blog/<%=blog.id%>" class="btn btn-cyan btn-sm">Edit</a>
+                                            <a href="/blog/delete-blog/<%=blog.id%>"
+                                                class="btn btn-danger btn-sm">Delete</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <% })%>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+                <!-- column -->
+
+
+            </div>
+
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+
+
+
+
+        <%- include('../footer')%>
+        
+            <script>
+                const handalclickmore=(id)=> {
+                    document.getElementById("readmore-" + id).style.display = "none";
+                    document.getElementById("readless-" + id).style.display = "block";
+                }
+
+                const handalclickless=(id)=> {
+                    document.getElementById("readless-" + id).style.display = "none";
+                    document.getElementById("readmore-" + id).style.display = "block";
+                }
+            </script>
