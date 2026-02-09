@@ -60,24 +60,28 @@
                                     <thead>
                                         <tr>
                                             <th>Profile</th>
-                                            <th>Name</th>
+                                            <th>category</th>
+                                            <th>subcategory</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
 
-                                        <% categoryes.forEach((category,i)=> {%>
+                                        <% subcategoryes.forEach((subcategory,i)=> {%>
                                             <tr class="align-middle">
-                                                <td class="align-middle"><img src="<%=category.categoryImage%>"
+                                                <td class="align-middle"><img src="<%=subcategory.categoryid.categoryImage%>"
                                                          width="50" height="50"
                                                         alt=""></td>
                                                 <td class="align-middle">
-                                                   <%=category.category%>
+                                                   <%=subcategory.categoryid.category%>
                                                 </td>
                                                 <td class="align-middle">
-                                                    <a href="/category/edit-category/<%=category.id%>"
+                                                   <%=subcategory.subcategory%>
+                                                </td>
+                                                <td class="align-middle">
+                                                    <a href="/subcategory/edit-subcategory/<%=subcategory.id%>"
                                                         class="btn btn-cyan btn-sm">Edit</a>
-                                                    <a href="/category/delete-category/<%=category.id%>"
+                                                    <a href="/subcategory/delete-subcategory/<%=subcategory.id%>"
                                                         class="btn btn-danger btn-sm">delete</a>
                                                 </td>
                                             </tr>

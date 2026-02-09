@@ -4,8 +4,7 @@ const otpgenerator = require('otp-generator')
 const sendMail = require('../middalwear/sendmail')
 
 exports.deshboard = (req,res)=>{
-       let user = req.user;
-       console.log("user",user)
+       
         res.render('deshboard')
  
 }

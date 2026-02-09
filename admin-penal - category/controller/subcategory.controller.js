@@ -25,67 +25,65 @@ exports.addSubCategory = async(req,res)=>{
 
 
 
-// exports.viewCategorypage = async(req,res)=>{
-//    try {
-//     let categoryes = await categoryModel.find()
-//     res.render('category/viewcategory',{categoryes})
-//    } catch (error) {
-//     console.log(error)
-//    }
-// }
+exports.viewSubCategorypage = async(req,res)=>{
+   try {
+    let search = req.query.search || ""
+    console.log(search)
 
-
-// exports.editCategorypage = async(req,res)=>{
-//    try {
-//     let id = req.params.id
-//     let category= await categoryModel.findById(id)
-
-//     res.render('category/editcategory',{category})
-//    } catch (error) {
-//     console.log(error)
-//    }
-// }
-
-// exports.updateCategory = async(req,res)=>{
-//    try {
-//     let id = req.params.id
-//     let category= await categoryModel.findById(id)
-//     let imagepath = category.categoryImage
-//     if(req.file){
-//         if(imagepath != ''){
-//             let deletepath = path.join(__dirname,"..",imagepath)
-//             await fs.unlinkSync(deletepath)
-//         }
-//         imagepath = `/uploads/${req.file.filename}`
-//     }
-
-//         await categoryModel.findByIdAndUpdate(id,{
-//             ...req.body,
-//             categoryImage:imagepath
-//         },{new:true})
-//         req.flash('success',"Category Update!!!!")
-//     res.redirect('/category/view-category')
-//    } catch (error) {
-//     console.log(error)
-//    }
-// }
-
-
-
-// exports.deleteCategory = async(req,res)=>{
-//    try {
-//     let id = req.params.id
-//     let category= await categoryModel.findById(id)
-//     let imagepath = category.categoryImage
    
-//         if(imagepath != ''){
-//             let deletepath = path.join(__dirname,"..",imagepath)
-//             await fs.unlinkSync(deletepath)
-//         }
-//         await categoryModel.findByIdAndDelete(id)
-//         req.flash('sucess',"Category Deleted!!!!")
-//     res.redirect('/category/view-category')
-//    } catch (error) {
-//     console.log(error)
-//    }
-// }
+    let subcategoryes = await subcategoryModel.find().populate({
+        path:'categoryid',
+        match:{category: { $regex: search, $options: 'i' }}
+    })
+
+    subcategoryes = subcategoryes.filter((subcat)=>subcat.categoryid !== null )
+    console.log(subcategoryes)
+    res.render('subcategory/viewsubcategory',{subcategoryes})
+   } catch (error) {
+    console.log(error)
+   }
+}
+
+
+exports.editSubCategorypage = async(req,res)=>{
+   try {
+    let id = req.params.id
+    let subcategory= await subcategoryModel.findById(id)
+
+    res.render('subcategory/editSubcategory',{subcategory})
+   } catch (error) {
+    console.log(error)
+   }
+}
+
+exports.updateSubCategory = async(req,res)=>{
+   try {
+    let id = req.params.id
+    
+
+       let subcategory =  await subcategoryModel.findByIdAndUpdate(id,{
+            subcategory:req.body.subcategory
+        },{new:true})
+        console.log(subcategory)
+        req.flash('success',"Category Update!!!!")
+    res.redirect('/subcategory/view-subcategory')
+   } catch (error) {
+    console.log(error)
+   }
+}
+
+
+
+exports.deleteSubCategory = async(req,res)=>{
+   try {
+    let id = req.params.id
+   
+   console.log(id)
+       
+        await subcategoryModel.findByIdAndDelete(id)
+        req.flash('sucess',"Sub Category Deleted!!!!")
+    res.redirect('/subcategory/view-subcategory')
+   } catch (error) {
+    console.log(error)
+   }
+}

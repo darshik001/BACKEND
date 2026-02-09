@@ -43,11 +43,17 @@
                                     <h5 class="card-title">Admins details </h5>
 
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <form action="">
                                         <div class="input-group">
-                                            <input type="search" class="form-control" name="search">
+                                            <input type="search" value="<%=search%>" class="form-control" name="search">
+                                            <select class="form-control" name="sorting" id="">
+                                                <option value="">Select soting</option>
+                                                <option value="1" <%= sorting === "1" ? "selected" : "" %>>Sort by A:Z</option>
+                                                <option value="-1" <%= sorting === "-1" ? "selected" : "" %>>Sort by Z:A</option>      
+                                            </select>                                      </select>
                                             <button class="btn btn-outline-primary">search</button>
+                                            <button class="btn btn-outline-primary" type="reset">reset</button>
 
 
                                         </div>
@@ -69,10 +75,9 @@
                                         <% categoryes.forEach((category,i)=> {%>
                                             <tr class="align-middle">
                                                 <td class="align-middle"><img src="<%=category.categoryImage%>"
-                                                         width="50" height="50"
-                                                        alt=""></td>
+                                                        width="50" height="50" alt=""></td>
                                                 <td class="align-middle">
-                                                   <%=category.category%>
+                                                    <%=category.category%>
                                                 </td>
                                                 <td class="align-middle">
                                                     <a href="/category/edit-category/<%=category.id%>"

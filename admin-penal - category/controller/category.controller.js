@@ -1,4 +1,5 @@
 const categoryModel = require('../model/category.model')
+const subcategoryModel = require('../model/subcategory.model')
 const path = require("path")
 const fs = require("fs")
 exports.addCategorypage = async(req,res)=>{
@@ -29,9 +30,20 @@ exports.addCategory = async(req,res)=>{
 
 
 exports.viewCategorypage = async(req,res)=>{
+    let search = req.query.search || "";
+    let sorting = req.query.sorting || "";
+    let sort;
+    if(sorting !==''){
+      sort={
+        category:parseInt(sorting)
+      }
+    }
+    let filter ={ $or:[
+        {category:{$regex:search,$options:'i'}}
+    ]}
    try {
-    let categoryes = await categoryModel.find()
-    res.render('category/viewcategory',{categoryes})
+    let categoryes = await categoryModel.find(filter).sort(sort)
+    res.render('category/viewcategory',{categoryes,search,sorting})
    } catch (error) {
     console.log(error)
    }
@@ -86,6 +98,7 @@ exports.deleteCategory = async(req,res)=>{
             await fs.unlinkSync(deletepath)
         }
         await categoryModel.findByIdAndDelete(id)
+        await subcategoryModel.deleteMany
         req.flash('sucess',"Category Deleted!!!!")
     res.redirect('/category/view-category')
    } catch (error) {

@@ -34,23 +34,17 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card">
-                            <form class="form-horizontal" action="/category/update-category/<%=category.id%>" method="post" enctype="multipart/form-data">
+                            <form class="form-horizontal" action="/subcategory/update-subcategory/<%=subcategory.id%>" method="post">
                                 <div class="card-body">
                                     <h4 class="card-title yext-center">Update Category</h4>
                                     <div class="form-group row">
-                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Category</label>
+                                        <label for="fname" class="col-sm-3 text-right control-label col-form-label">Sub Category</label>
                                         <div class="col-sm-9">
-                                            <input type="text" class="form-control" value="<%=category.category%>" name="category" placeholder="Category Name Here">
+                                            <input type="text" class="form-control" value="<%=subcategory.subcategory%>" name="subcategory" placeholder="Category Name Here">
                                         </div>
                                     </div>
                             
-                                     <div class="form-group row">
-                                        <label for="cono1" class="col-sm-3 text-right control-label col-form-label">Category Image</label>
-                                        <div class="col-sm-9">
-                                            <input type="file" class="form-control" id="cono1" name="categoryImage">
-                                            <img class="mt-2" src="<%=category.categoryImage%>" alt="" width="100" height="100">
-                                        </div>
-                                    </div>
+                                    
                                   
                                 </div>
                                 <div class="border-top text-center">
