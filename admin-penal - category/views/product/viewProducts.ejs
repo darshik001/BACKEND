@@ -1,0 +1,149 @@
+<%- include('../header')%>
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- Page wrapper  -->
+    <!-- ============================================================== -->
+    <div class="page-wrapper">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="page-breadcrumb">
+            <div class="row">
+                <div class="col-12 d-flex no-block align-items-center">
+                    <h4 class="page-title">admin</h4>
+                    <div class="ml-auto text-right">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">admin</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Container fluid  -->
+        <!-- ============================================================== -->
+        <div class="container-fluid">
+            <!-- ============================================================== -->
+            <!-- Start Page Content -->
+            <!-- ============================================================== -->
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-body">
+
+                            <div class="row justify-content-around align-items-center mb-5">
+                                <div class="col-4">
+                                    <h5 class="card-title">Admins details </h5>
+
+                                </div>
+                                <div class="col-4">
+                                    <form action="">
+                                        <div class="input-group">
+                                            <input type="search" id="search" class="form-control" name="search">
+                                            <button id="searchbtn" class="btn btn-primary"disabled>search</button>
+                                            <button id="resetbtn" class="btn btn-primary">Reset</button>
+                                            
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                          
+
+<div class="row">
+    <% products.forEach((product, i) => { %>
+        <div class="col-md-4 col-lg-3 mb-4">
+            <div class="card h-100 shadow-sm">
+
+                <!-- Product Image -->
+                <img src="<%= product.productImage %>" 
+                     class="card-img-top"
+                     style="height:200px; object-fit:cover;"
+                     alt="product image">
+
+                <div class="card-body d-flex flex-column">
+                    
+                    <!-- Title -->
+                    <h5 class="card-title"><%= product.title %></h5>
+
+                    <!-- Price -->
+                    <h6 class="text-success mb-2">₹ <%= product.price %></h6>
+
+                    <!-- Category Info -->
+                    <p class="mb-1">
+                        <strong>Category:</strong> <%= product.categoryid.category %>
+                    </p>
+                    <p class="mb-1">
+                        <strong>SubCategory:</strong> <%= product.subcategoryid.subcategory %>
+                    </p>
+                    <p class="mb-1">
+                        <strong>Type:</strong> <%= product.extracategoryid.extracategory %>
+                    </p>
+
+                    <!-- Description -->
+                    <p class="card-text text-muted small mt-2">
+                        <%= product.Description %>
+                    </p>
+
+                    <!-- Actions -->
+                    <div class="mt-auto d-flex justify-content-between">
+                        <a href="#" class="btn btn-cyan btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    <% }) %>
+</div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End PAge Content -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- Right sidebar -->
+            <!-- ============================================================== -->
+            <!-- .right-sidebar -->
+            <!-- ============================================================== -->
+            <!-- End Right sidebar -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Container fluid  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- footer -->
+        <%- include('../footer')%>
+
+        <script>
+            let search = document.getElementById('search')
+            let searchbtn = document.getElementById('searchbtn')
+            const resetbtn = document.getElementById('resetbtn');
+            search.addEventListener('input',()=>{
+                  if(search.value.trim()!==""){
+                    searchbtn.removeAttribute('disabled')
+
+                  }  else {
+              searchbtn.setAttribute('disabled', true);
+    }
+            })
+
+
+             resetbtn.addEventListener('click', () => {
+        search.value = "";
+        searchbtn.disabled = true;
+    });
+        </script>

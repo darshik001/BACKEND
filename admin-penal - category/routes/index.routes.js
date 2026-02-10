@@ -19,4 +19,6 @@ routes.use('/admin',passport.checkAuthenticated,require('./admine.routes'))
 routes.use('/user',require('./auth.routes'))
 routes.use('/category',passport.checkAuthenticated,require('./category.routes'))
 routes.use('/subcategory',passport.checkAuthenticated,require('./subcategory.routes'))
+routes.use('/extracategory',passport.checkAuthenticated,require('./extracategory.routes'))
+routes.use('/product',passport.checkAuthenticated,require('./product.routes'))
 module.exports = routes

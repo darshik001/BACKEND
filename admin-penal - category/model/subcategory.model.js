@@ -12,4 +12,4 @@ const subcategorySchema = mongoose.Schema({
 
 
 
-module.exports = mongoose.model('subcategory',subcategorySchema)
+module.exports = mongoose.model('subcategories',subcategorySchema)

@@ -1,6 +1,6 @@
 const categoryModel = require('../model/category.model')
 const subcategoryModel = require('../model/subcategory.model')
-
+const extracategoryModel = require('../model/extracategory.model')
 
 exports.addSubCategorypage = async(req,res)=>{
    try {
@@ -37,7 +37,6 @@ exports.viewSubCategorypage = async(req,res)=>{
     })
 
     subcategoryes = subcategoryes.filter((subcat)=>subcat.categoryid !== null )
-    console.log(subcategoryes)
     res.render('subcategory/viewsubcategory',{subcategoryes})
    } catch (error) {
     console.log(error)
@@ -64,7 +63,6 @@ exports.updateSubCategory = async(req,res)=>{
        let subcategory =  await subcategoryModel.findByIdAndUpdate(id,{
             subcategory:req.body.subcategory
         },{new:true})
-        console.log(subcategory)
         req.flash('success',"Category Update!!!!")
     res.redirect('/subcategory/view-subcategory')
    } catch (error) {
@@ -81,6 +79,9 @@ exports.deleteSubCategory = async(req,res)=>{
    console.log(id)
        
         await subcategoryModel.findByIdAndDelete(id)
+       let deleteExtracategory =  await extracategoryModel.deleteMany({subcategoryid:id})
+       console.log("Extra category is deleted",deleteExtracategory)
+
         req.flash('sucess',"Sub Category Deleted!!!!")
     res.redirect('/subcategory/view-subcategory')
    } catch (error) {
